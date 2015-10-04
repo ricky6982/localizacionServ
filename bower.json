@@ -1,0 +1,19 @@
+{
+  "name": "localizacionServ",
+  "version": "0.1.0",
+  "authors": [
+    "RickySSD <ricky6982@gmail.com>"
+  ],
+  "description": "Prototipo para crear los diferentes servicios y localizarlos en el mapa de recorridos.",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.5",
+    "angular": "~1.4.7",
+    "vis": "~4.9.0"
+  }
+}
