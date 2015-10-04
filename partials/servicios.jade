@@ -1,0 +1,58 @@
+div
+    div(class="pull-right")
+        button(type="button", class="btn btn-primary", data-toggle="modal", data-target="#servicioModal")
+            i(class="glyphicon glyphicon-plus")  
+            | Servicio
+
+    h2(class="text-center text-muted", ng-hide="servicios.length > 0") Primero debes agregar un Servicio. 
+    div(ng-repeat="serv in servicios", ng-show="servicios.length > 0")
+        legend(class="form-inline")
+            div(class="btn-group")
+                div(class="dropdown")
+                    button(type="button", class="btn btn-link dropdown-toggle", data-toggle="dropdown")
+                        i(class="glyphicon glyphicon-cog") 
+                    ul(class="dropdown-menu")
+                        li 
+                            button(class="btn btn-link", ng-click="servicio.editar($index)")
+                                i(class="glyphicon glyphicon-pencil")
+                                |  Editar servicio
+                        li 
+                            button(class="btn btn-link", ng-click="servicio.borrar()")
+                                i(class="glyphicon glyphicon-trash")
+                                |  Borrar servicio
+            span(ng-hide="servicio.selected == $index") {{ serv.nombre }}
+            form(class="form-group", ng-show="servicio.selected == $index")
+                input(type="text", class="form-control", ng-model="serv.nombre")
+                button(class="btn btn-success", ng-click="servicio.endEdit()") OK
+            button(class="btn btn-primary btn-xs", data-toggle="modal", data-target="#itemModal", ng-click="item.nuevo(serv.id)")
+                i(class="glyphicon glyphicon-plus") 
+                |  Item
+
+        h2(class="text-center text-muted", ng-hide="serv.items.length > 0") Todavia no hay items en este Servicio.
+        table(class="table table-bordered table-striped table-header", ng-show="serv.items.length > 0")
+            thead
+                tr
+                    th #
+                    th Nombre
+                    th Descripción
+                    th(style="width: 150px;")
+            tbody
+                tr(ng-repeat="itemServicio in serv.items")
+                    td {{ $index + 1}}
+                    td 
+                        span(ng-hide="item.editForm($parent.serv.id, $index)") {{ itemServicio.nombre }}
+                        input(type="text", ng-model="itemServicio.nombre", class="form-control", ng-show="item.editForm($parent.serv.id, $index)")
+                    td
+                        span(ng-hide="item.editForm($parent.serv.id, $index)") {{ itemServicio.descripcion }}
+                        input(type="text", ng-model="itemServicio.descripcion", class="form-control", ng-show="item.editForm($parent.serv.id, $index)")
+                    td(class="text-center")
+                        button(class="btn btn-success btn-xs", ng-click="item.endEdit()", ng-show="item.editForm($parent.serv.id, $index)")
+                            i(class="glyphicon glyphicon-ok")
+                            |  Listo
+                        button(class="btn btn-info btn-xs", ng-click="item.editar($parent.serv.id, $index)", ng-hide="item.editForm($parent.serv.id, $index)")
+                            i(class="glyphicon glyphicon-pencil")
+                            |  Editar
+                        button(class="btn btn-danger btn-xs", ng-click="item.borrar($parent.serv.id, $index)") 
+                            i(class="glyphicon glyphicon-trash")
+                            |  Borrar
+

@@ -7,9 +7,23 @@ block objetivo
     include objetivo.jade
 
 block contenido
+    div
+        ul(class="nav nav-tabs")
+            li(class="active")
+                a(href="#servicios", data-toggle="tab") Servicios
+            li
+                a(href="#localizacion", data-toggle="tab") Localización de Servicios
+
+        div(class="tab-content")
+            div(class="tab-pane active", id="servicios")
+                include partials/servicios.jade
+            div(class="tab-pane", id="localizacion")
+                | Localización de Servicios
     
-    
+    include partials/servicioModal.jade
+    include partials/itemModal.jade
+
     div(class="row", style="margin-top: 30px;")
         pre
             legend Modelo
-            
+            | {{ servicios | json }}

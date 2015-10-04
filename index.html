@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="bower_components/animate.css/animate.min.css">
     <link rel="stylesheet" href="css/main.css">
     <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/underscore/underscore-min.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="js/app.js"></script>
@@ -27,9 +28,126 @@
       </ul>
     </div>
     <div style="margin: 10px;" class="row">
+      <div>
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#servicios" data-toggle="tab">Servicios</a></li>
+          <li><a href="#localizacion" data-toggle="tab">Localización de Servicios</a></li>
+        </ul>
+        <div class="tab-content">
+          <div id="servicios" class="tab-pane active">
+            <div>
+              <div class="pull-right">
+                <button type="button" data-toggle="modal" data-target="#servicioModal" class="btn btn-primary"><i class="glyphicon glyphicon-plus"> </i>Servicio</button>
+              </div>
+              <h2 ng-hide="servicios.length &gt; 0" class="text-center text-muted">Primero debes agregar un Servicio. </h2>
+              <div ng-repeat="serv in servicios" ng-show="servicios.length &gt; 0">
+                <legend class="form-inline">
+                  <div class="btn-group">
+                    <div class="dropdown">
+                      <button type="button" data-toggle="dropdown" class="btn btn-link dropdown-toggle"><i class="glyphicon glyphicon-cog"> </i></button>
+                      <ul class="dropdown-menu">
+                        <li> 
+                          <button ng-click="servicio.editar($index)" class="btn btn-link"><i class="glyphicon glyphicon-pencil"></i> Editar servicio</button>
+                        </li>
+                        <li> 
+                          <button ng-click="servicio.borrar()" class="btn btn-link"><i class="glyphicon glyphicon-trash"></i> Borrar servicio</button>
+                        </li>
+                      </ul>
+                    </div>
+                  </div><span ng-hide="servicio.selected == $index">{{ serv.nombre }}</span>
+                  <form ng-show="servicio.selected == $index" class="form-group">
+                    <input type="text" ng-model="serv.nombre" class="form-control">
+                    <button ng-click="servicio.endEdit()" class="btn btn-success">OK</button>
+                  </form>
+                  <button data-toggle="modal" data-target="#itemModal" ng-click="item.nuevo(serv.id)" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-plus"> </i> Item</button>
+                </legend>
+                <h2 ng-hide="serv.items.length &gt; 0" class="text-center text-muted">Todavia no hay items en este Servicio.</h2>
+                <table ng-show="serv.items.length &gt; 0" class="table table-bordered table-striped table-header">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Nombre</th>
+                      <th>Descripción</th>
+                      <th style="width: 150px;"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="itemServicio in serv.items">
+                      <td>{{ $index + 1}}</td>
+                      <td> <span ng-hide="item.editForm($parent.serv.id, $index)">{{ itemServicio.nombre }}</span>
+                        <input type="text" ng-model="itemServicio.nombre" ng-show="item.editForm($parent.serv.id, $index)" class="form-control">
+                      </td>
+                      <td><span ng-hide="item.editForm($parent.serv.id, $index)">{{ itemServicio.descripcion }}</span>
+                        <input type="text" ng-model="itemServicio.descripcion" ng-show="item.editForm($parent.serv.id, $index)" class="form-control">
+                      </td>
+                      <td class="text-center">
+                        <button ng-click="item.endEdit()" ng-show="item.editForm($parent.serv.id, $index)" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-ok"></i> Listo</button>
+                        <button ng-click="item.editar($parent.serv.id, $index)" ng-hide="item.editForm($parent.serv.id, $index)" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-pencil"></i> Editar</button>
+                        <button ng-click="item.borrar($parent.serv.id, $index)" class="btn btn-danger btn-xs"> <i class="glyphicon glyphicon-trash"></i> Borrar</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div id="localizacion" class="tab-pane">Localización de Servicios</div>
+        </div>
+      </div>
+      <div id="servicioModal" tabindex="-1" role="dialog" aria-labelledby="MyModalLabel" class="modal fade">
+        <div role="document" class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Nuevo Servicio</h4>
+            </div>
+            <div class="modal-body form-horizontal">
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Nombre:</label>
+                <div class="col-sm-6">
+                  <input type="text" ng-model="servicioModal.nombre" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" data-dismiss="modal" class="btn btn-default">Cerrar</button>
+              <button type="button" data-dismiss="modal" ng-click="servicio.nuevo()" class="btn btn-primary">Guardar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="itemModal" tabindex="-1" role="dialog" aria-labelledby="MyModalLabel" class="modal fade">
+        <div role="document" class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Nuevo Item para el Servicio</h4>
+            </div>
+            <div class="modal-body form-horizontal">
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Nombre</label>
+                <div class="col-sm-6">
+                  <input type="text" ng-model="itemModal.nombre" class="form-control">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Descripción</label>
+                <div class="col-sm-6">
+                  <input type="text" ng-model="itemModal.descripcion" class="form-control">
+                </div>
+              </div>
+              <input type="hidden" ng-model="itemModal.servicio">
+            </div>
+            <div class="modal-footer">
+              <button type="button" data-dismiss="modal" class="btn btn-default">Cerrar</button>
+              <button type="button" data-dismiss="modal" ng-click="item.guardar()" class="btn btn-primary">Guardar</button>
+            </div>
+          </div>
+        </div>
+      </div>
       <div style="margin-top: 30px;" class="row">
         <pre>
-          <legend>Modelo</legend></pre>
+          <legend>Modelo</legend>{{ servicios | json }}</pre>
       </div>
     </div>
   </div>
