@@ -1,0 +1,35 @@
+#network {
+  width: 100%;
+  height: 600px;
+}
+.leyenda {
+  background-color: #39A3BB;
+  border-radius: 5px;
+  border: 1px solid rgba(183, 157, 157, 0.52);
+  box-shadow: 0 0 50px rgba(206, 201, 201, 0.75);
+  color: white;
+  margin: 50px;
+  padding: 50px;
+}
+header {
+  background: #F69F01;
+  color: white;
+}
+header h1 {
+  margin: 0px;
+  padding: 25px 0 0 0;
+  text-align: center;
+}
+header h2 {
+  color: #3F4904;
+  font-size: 1.2em;
+  font-style: italic;
+  padding: 10px;
+}
+.table-header thead {
+  background-color: #0B64BA;
+  color: white;
+}
+.table-header thead th {
+  text-align: center;
+}

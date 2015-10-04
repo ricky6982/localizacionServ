@@ -1,0 +1,34 @@
+doctype html
+html
+    head
+        meta(charset="UTF-8")
+        title Prototipo Creación y Localización de Servicios
+        link(rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css")
+        link(rel="stylesheet" href="bower_components/animate.css/animate.min.css")
+        link(rel="stylesheet" href="css/main.css")
+
+        script(src="bower_components/jquery/dist/jquery.js")
+        script(src="bower_components/angular/angular.min.js")
+        script(src="bower_components/bootstrap/dist/js/bootstrap.min.js")
+        block javascripts
+            
+
+body(ng-app="app" ng-controller="AppCtrl")
+    header
+        h1 Prototipo para la Creación y Localización de Servicios
+        h2 Permitir al usuario agregar los servicios disponibles en la nueva terminal y localizarlos en el mapa de recorrido.
+
+    legend(class="text-center") 
+        block titulo
+            | Utilizando AngularJs, underscore y jquery
+
+    div(class="container")
+        //- Descripción del Prototipo
+        div(class="well well-sm")
+            strong Objetivo:
+            block objetivo
+
+        div(class="row", style="margin: 10px;")
+            block contenido
+
+
