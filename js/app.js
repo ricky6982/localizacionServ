@@ -37,8 +37,8 @@ app.controller('AppCtrl', [
                 var item = angular.copy($scope.itemModal);
                 item.id = generateId(servicio.items);
                 servicio.items.push(item);
-                $scope.servicioModal.nombre = "";
-                $scope.servicioModal.descripcion = "";
+                $scope.itemModal.nombre = "";
+                $scope.itemModal.descripcion = "";
             },
 
             editable: {
