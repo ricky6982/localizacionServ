@@ -96,8 +96,30 @@
               <div class="col-sm-5 localizacion">
                 <legend>Controles para agregar los servicios y locales comerciales al mapa de recorrido.</legend>
                 <div class="nodo-origen">154</div>
-                <div class="panel-izq">Panel Izquierdo</div>
-                <div class="panel-der">Panel Derecho</div>
+                <div class="panel-izq"> 
+                  <div ng-repeat="i in [1,2,3]" class="popover left popover-item">
+                    <div class="arrow"></div>
+                    <h3 class="popover-title">
+                      <select class="form-control">
+                        <option value="0">Boleteria El Quiaqueño de La quiaca a jujuy</option>
+                        <option value="1">Boleteria Balut</option>
+                      </select>
+                    </h3>
+                    <div class="popover-content">Contenido</div>
+                  </div>
+                </div>
+                <div class="panel-der">
+                  <div class="popover right popover-item">
+                    <div class="arrow"></div>
+                    <div class="popover-content">
+                      <select class="form-control">
+                        <option value="0">Boleteria El Quiaqueño de La quiaca a jujuy</option>
+                        <option value="1">Boleteria Balut</option>
+                      </select>
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>
+                </div>
                 <div class="nodo-destino">689</div>
               </div>
               <div class="col-sm-7">red</div>

@@ -62,3 +62,10 @@ header h2 {
   position: relative;
   width: 50%;
 }
+.localizacion .popover-item {
+  position: relative;
+  margin: 20px 0;
+  min-height: 9
+        0px;
+  display: block;
+}
