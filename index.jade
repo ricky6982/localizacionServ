@@ -18,7 +18,9 @@ block contenido
             div(class="tab-pane active", id="servicios")
                 include partials/servicios.jade
             div(class="tab-pane", id="localizacion")
-                | Localización de Servicios
+                div(class="row")
+                    include partials/localizacion/control.jade
+                    include partials/localizacion/network.jade
     
     include partials/servicioModal.jade
     include partials/itemModal.jade
