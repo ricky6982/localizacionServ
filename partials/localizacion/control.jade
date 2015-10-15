@@ -5,16 +5,24 @@ div(class="col-sm-5 localizacion")
         div(class="popover left popover-item", ng-repeat="i in [1,2,3]")
             div(class="arrow")
             h3(class="popover-title")
+                button(class="item-remove")
+                    i(class="glyphicon glyphicon-remove")
                 select(class="form-control")
                     option(value="0") Boleteria El Quiaqueño de La quiaca a jujuy
                     option(value="1") Boleteria Balut
-            div(class="popover-content") Contenido
+            div(class="popover-content")
+                | Contenido
+        button(class="btn btn-success") Agregar
     div(class="panel-der")
         div(class="popover right popover-item")
             div(class="arrow")
-            div(class="popover-content")
+            h3(class="popover-title")
+                button(class="item-remove")
+                    i(class="glyphicon glyphicon-remove")
                 select(class="form-control")
                     option(value="0") Boleteria El Quiaqueño de La quiaca a jujuy
                     option(value="1") Boleteria Balut
-                input(type="number", class="form-control")
+            div(class="popover-content")
+                | Contenido
+        button(class="btn btn-success") Agregar
     div(class="nodo-destino") 689

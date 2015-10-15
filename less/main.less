@@ -54,6 +54,25 @@ header{
     .panel-izq, .panel-der{
         float: left;
         padding: 20px 0;
+        position: relative;
+        text-align: center;
+        .item-remove{
+            background-color: #D02727;
+            border-radius: 50%;
+            border: 2px solid red;
+            color: white;
+            height: 30px;
+            position: absolute;
+            right: -10px;
+            top: -15px;
+            width: 30px;
+            &:hover{
+                background-color: #FC0404;
+            }
+            &:active{
+                background-color: #CB0000;
+            }
+        }
     }
 
     .panel-izq{
