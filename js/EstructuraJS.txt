@@ -1,0 +1,18 @@
+GUI Localización de Servicios
+
+    - der: Variable que se cargara dinamicamente en función del arco seleccionado los datos correspondientes al lado derecho y contendra los servicios asociados previamente por el usuario
+    
+    - izq: Variable con la misma funcion que la variable der solo que representa el lado izquierdo del arco. 
+    
+    - add(direccion): function que permite agregar un nuevo item de servicio en el lado correspondiente a direccion que puede ser "izq" o "der".
+    
+    - remove(item): remueve el item seleccionado y lo quita de la lista a la que pertenece "der" o "izq".
+
+Objetos de Interes:
+
+    - item: correspondiente a un servicio en un lugar terminado tendra las siguientes propiedades:
+        + idCategoria   -> Para Editar y Mostrar en la interfaz
+        + idServicio    -> Para Editar y Mostrar en la interfaz
+        + categoria     -> Información Referencial
+        + servicio      -> Información Referencial
+        + distancia     -> Información Referencial
