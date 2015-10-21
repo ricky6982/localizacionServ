@@ -1,18 +1,39 @@
+Diccionario de Datos
+    - lugar: representa un servicio en un lugar fisico.
+    - direccion: puede tener solo dos valores: "izq" y "der".
+
 GUI Localización de Servicios
 
     - der: Variable que se cargara dinamicamente en función del arco seleccionado los datos correspondientes al lado derecho y contendra los servicios asociados previamente por el usuario
     
     - izq: Variable con la misma funcion que la variable der solo que representa el lado izquierdo del arco. 
     
-    - add(direccion): function que permite agregar un nuevo item de servicio en el lado correspondiente a direccion que puede ser "izq" o "der".
+    - add(direccion, lugar): function que permite agregar un nuevo lugar de servicio en el lado correspondiente a direccion que puede ser "izq" o "der"
     
-    - remove(item): remueve el item seleccionado y lo quita de la lista a la que pertenece "der" o "izq".
+    - remove(lugar): remueve el lugar seleccionado y lo quita de la lista a la que pertenece "der" o "izq".
 
 Objetos de Interes:
 
-    - item: correspondiente a un servicio en un lugar terminado tendra las siguientes propiedades:
+    - lugar: correspondiente a un servicio en un lugar terminado tendra las siguientes propiedades:
         + idCategoria   -> Para Editar y Mostrar en la interfaz
         + idServicio    -> Para Editar y Mostrar en la interfaz
         + categoria     -> Información Referencial
         + servicio      -> Información Referencial
         + distancia     -> Información Referencial
+
+La localización de los servicios estará representada mediante la siguiente estructura: 
+
+edge: {
+    id: "AB343AB",
+    from: 1,
+    to: 2,
+    (...),
+    lugares: {
+        izq: [
+            {lugar_1}, {lugar_2}, ... , {lugar_n}
+        ],
+        der: [
+            {lugar_10}, {lugar_11}, ..., {lugar_m}
+        ]
+    }
+}
