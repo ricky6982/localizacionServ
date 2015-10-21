@@ -2,17 +2,9 @@ div(class="col-sm-5 localizacion")
     legend Controles para agregar los servicios y locales comerciales al mapa de recorrido.
     div(class="nodo-origen") 154
     div(class="panel-izq") 
-        div(class="popover left popover-item", ng-repeat="i in [1,2,3]")
-            div(class="arrow")
-            h3(class="popover-title")
-                button(class="item-remove")
-                    i(class="glyphicon glyphicon-remove")
-                select(class="form-control")
-                    option(value="0") Boleteria El Quiaqueño de La quiaca a jujuy
-                    option(value="1") Boleteria Balut
-            div(class="popover-content")
-                | Contenido
-        button(class="btn btn-success") Agregar
+        div(ts-panel-servicio listado-servicios="listadoServicios")
+        button(class="btn btn-success", ng-click="guiLocalizar.add('izq')") Agregar
+    
     div(class="panel-der")
         div(class="popover right popover-item")
             div(class="arrow")
@@ -24,5 +16,19 @@ div(class="col-sm-5 localizacion")
                     option(value="1") Boleteria Balut
             div(class="popover-content")
                 | Contenido
-        button(class="btn btn-success") Agregar
+        button(class="btn btn-success", ng-click="guiLocalizar.add('der')") Agregar
     div(class="nodo-destino") 689
+
+//- Template Panel de Servicios que utiliza la Directiva ts-panel-servicio
+script( type="text/ng-template", id="panel-servicio.html")
+    div(class="popover popover-item")
+        div(class="arrow")
+        h3(class="popover-title")
+            button(class="item-remove")
+                i(class="glyphicon glyphicon-remove")
+            select(class="form-control")
+                option(ng-repeat="c in listadoServicios", value="{{ c.id }}") {{ c.nombre }}
+            select(class="form-control", ng-model="lugar.idServicio", ng-disabled="!item.idCategoria")
+                option(ng-repeat="s in sublistaServicios" , value="{{ s.id }}") {{ s.nombre }}
+        div(class="popover-content")
+            | Contenido

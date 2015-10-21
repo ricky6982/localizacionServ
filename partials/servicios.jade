@@ -4,8 +4,8 @@ div
             i(class="glyphicon glyphicon-plus")  
             | Servicio
 
-    h2(class="text-center text-muted", ng-hide="servicios.length > 0") Primero debes agregar un Servicio. 
-    div(ng-repeat="serv in servicios", ng-show="servicios.length > 0")
+    h2(class="text-center text-muted", ng-hide="listadoServicios.length > 0") Primero debes agregar un Servicio. 
+    div(ng-repeat="serv in listadoServicios", ng-show="listadoServicios.length > 0")
         legend(class="form-inline")
             div(class="btn-group")
                 div(class="dropdown")
@@ -17,7 +17,7 @@ div
                                 i(class="glyphicon glyphicon-pencil")
                                 |  Editar servicio
                         li 
-                            button(class="btn btn-link", ng-click="servicio.borrar()")
+                            button(class="btn btn-link", ng-click="servicio.borrar($index)")
                                 i(class="glyphicon glyphicon-trash")
                                 |  Borrar servicio
             span(ng-hide="servicio.selected == $index") {{ serv.nombre }}

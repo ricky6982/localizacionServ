@@ -39,8 +39,8 @@
               <div class="pull-right">
                 <button type="button" data-toggle="modal" data-target="#servicioModal" class="btn btn-primary"><i class="glyphicon glyphicon-plus"> </i>Servicio</button>
               </div>
-              <h2 ng-hide="servicios.length &gt; 0" class="text-center text-muted">Primero debes agregar un Servicio. </h2>
-              <div ng-repeat="serv in servicios" ng-show="servicios.length &gt; 0">
+              <h2 ng-hide="listadoServicios.length &gt; 0" class="text-center text-muted">Primero debes agregar un Servicio. </h2>
+              <div ng-repeat="serv in listadoServicios" ng-show="listadoServicios.length &gt; 0">
                 <legend class="form-inline">
                   <div class="btn-group">
                     <div class="dropdown">
@@ -50,7 +50,7 @@
                           <button ng-click="servicio.editar($index)" class="btn btn-link"><i class="glyphicon glyphicon-pencil"></i> Editar servicio</button>
                         </li>
                         <li> 
-                          <button ng-click="servicio.borrar()" class="btn btn-link"><i class="glyphicon glyphicon-trash"></i> Borrar servicio</button>
+                          <button ng-click="servicio.borrar($index)" class="btn btn-link"><i class="glyphicon glyphicon-trash"></i> Borrar servicio</button>
                         </li>
                       </ul>
                     </div>
@@ -97,18 +97,8 @@
                 <legend>Controles para agregar los servicios y locales comerciales al mapa de recorrido.</legend>
                 <div class="nodo-origen">154</div>
                 <div class="panel-izq"> 
-                  <div ng-repeat="i in [1,2,3]" class="popover left popover-item">
-                    <div class="arrow"></div>
-                    <h3 class="popover-title">
-                      <button class="item-remove"><i class="glyphicon glyphicon-remove"></i></button>
-                      <select class="form-control">
-                        <option value="0">Boleteria El Quiaqueño de La quiaca a jujuy</option>
-                        <option value="1">Boleteria Balut</option>
-                      </select>
-                    </h3>
-                    <div class="popover-content">Contenido</div>
-                  </div>
-                  <button class="btn btn-success">Agregar</button>
+                  <div ts-panel-servicio listado-servicios="listadoServicios"></div>
+                  <button ng-click="guiLocalizar.add('izq')" class="btn btn-success">Agregar</button>
                 </div>
                 <div class="panel-der">
                   <div class="popover right popover-item">
@@ -122,10 +112,25 @@
                     </h3>
                     <div class="popover-content">Contenido</div>
                   </div>
-                  <button class="btn btn-success">Agregar</button>
+                  <button ng-click="guiLocalizar.add('der')" class="btn btn-success">Agregar</button>
                 </div>
                 <div class="nodo-destino">689</div>
               </div>
+              <script type="text/ng-template" id="panel-servicio.html">
+                <div class="popover popover-item">
+                  <div class="arrow"></div>
+                  <h3 class="popover-title">
+                    <button class="item-remove"><i class="glyphicon glyphicon-remove"></i></button>
+                    <select class="form-control">
+                      <option ng-repeat="c in listadoServicios" value="{{ c.id }}">{{ c.nombre }}</option>
+                    </select>
+                    <select ng-model="lugar.idServicio" ng-disabled="!item.idCategoria" class="form-control">
+                      <option ng-repeat="s in sublistaServicios" value="{{ s.id }}">{{ s.nombre }}</option>
+                    </select>
+                  </h3>
+                  <div class="popover-content">Contenido</div>
+                </div>
+              </script>
               <div class="col-sm-7">red</div>
             </div>
           </div>
@@ -184,7 +189,9 @@
       </div>
       <div style="margin-top: 30px;" class="row">
         <pre>
-          <legend>Modelo</legend>{{ servicios | json }}</pre>
+          <legend>Modelo</legend>{{ guiLocalizar | json }}</pre>
+        <pre>
+          <legend>Modelo</legend>{{ listadoServicios | json }}</pre>
       </div>
     </div>
   </div>
