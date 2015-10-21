@@ -37,3 +37,21 @@ edge: {
         ]
     }
 }
+
+Los servicios que el usuario creará, editará y eliminará se almacenan en la siguiente estructura:
+
+listadoServicios: [
+    {
+        id: 1,                  -> ID de Categoría del servicio
+        nombre: "Boleterías",   -> Nombre de la Categoria
+        items: [
+            {
+                id: 10,         -> ID del Servició que pertenece a la Categoria
+                nombre: "Balut",-> Nombre del Servicio
+                descripción: "..."
+            },
+            (...)
+        ]
+    },
+    (...)
+]
