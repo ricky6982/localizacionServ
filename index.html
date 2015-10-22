@@ -11,6 +11,10 @@
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/directives.js"></script>
+    <script src="js/appCtrl.js"></script>
+    <script src="js/_servicioCtrl.js"></script>
+    <script src="js/_localizacionCtrl.js"></script>
   </head>
 </html>
 <body ng-app="app" ng-controller="AppCtrl">
@@ -34,7 +38,7 @@
           <li><a href="#localizacion" data-toggle="tab">Localización de Servicios</a></li>
         </ul>
         <div class="tab-content">
-          <div id="servicios" class="tab-pane active">
+          <div id="servicios" ng-controller="ServicioCtrl" class="tab-pane active">
             <div>
               <div class="pull-right">
                 <button type="button" data-toggle="modal" data-target="#servicioModal" class="btn btn-primary"><i class="glyphicon glyphicon-plus"> </i>Servicio</button>
@@ -90,41 +94,86 @@
                 </table>
               </div>
             </div>
+            <div id="servicioModal" tabindex="-1" role="dialog" aria-labelledby="MyModalLabel" class="modal fade">
+              <div role="document" class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Nuevo Servicio</h4>
+                  </div>
+                  <div class="modal-body form-horizontal">
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label">Nombre:</label>
+                      <div class="col-sm-6">
+                        <input type="text" ng-model="servicioModal.nombre" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Cerrar</button>
+                    <button type="button" data-dismiss="modal" ng-click="servicio.nuevo()" class="btn btn-primary">Guardar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="itemModal" tabindex="-1" role="dialog" aria-labelledby="MyModalLabel" class="modal fade">
+              <div role="document" class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Nuevo Item para el Servicio</h4>
+                  </div>
+                  <div class="modal-body form-horizontal">
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label">Nombre</label>
+                      <div class="col-sm-6">
+                        <input type="text" ng-model="itemModal.nombre" class="form-control">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label">Descripción</label>
+                      <div class="col-sm-6">
+                        <input type="text" ng-model="itemModal.descripcion" class="form-control">
+                      </div>
+                    </div>
+                    <input type="hidden" ng-model="itemModal.servicio">
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Cerrar</button>
+                    <button type="button" data-dismiss="modal" ng-click="item.guardar()" class="btn btn-primary">Guardar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div id="localizacion" class="tab-pane">
+          <div id="localizacion" ng-controller="LocalizacionCtrl" class="tab-pane">
             <div class="row">
               <div class="col-sm-5 localizacion">
                 <legend>Controles para agregar los servicios y locales comerciales al mapa de recorrido.</legend>
                 <div class="nodo-origen">154</div>
                 <div class="panel-izq"> 
-                  <div ts-panel-servicio listado-servicios="listadoServicios"></div>
-                  <button ng-click="guiLocalizar.add('izq')" class="btn btn-success">Agregar</button>
+                  <div ng-repeat="lugar in guiLugares.izq track by $index">
+                    <div ts-panel-servicio direccion="left" listado-servicios="listadoServicios" lugar="lugar"></div>
+                  </div>
+                  <button ng-click="guiLugares.add('izq')" class="btn btn-success">Agregar</button>
                 </div>
                 <div class="panel-der">
-                  <div class="popover right popover-item">
-                    <div class="arrow"></div>
-                    <h3 class="popover-title">
-                      <button class="item-remove"><i class="glyphicon glyphicon-remove"></i></button>
-                      <select class="form-control">
-                        <option value="0">Boleteria El Quiaqueño de La quiaca a jujuy</option>
-                        <option value="1">Boleteria Balut</option>
-                      </select>
-                    </h3>
-                    <div class="popover-content">Contenido</div>
+                  <div ng-repeat="lugar in guiLugares.der track by $index">
+                    <div ts-panel-servicio direccion="right" listado-servicios="listadoServicios" lugar="lugar"></div>
                   </div>
-                  <button ng-click="guiLocalizar.add('der')" class="btn btn-success">Agregar</button>
+                  <button ng-click="guiLugares.add('der')" class="btn btn-success">Agregar</button>
                 </div>
                 <div class="nodo-destino">689</div>
               </div>
               <script type="text/ng-template" id="panel-servicio.html">
-                <div class="popover popover-item">
+                <div class="popover popover-item {{ direccion }}">
                   <div class="arrow"></div>
                   <h3 class="popover-title">
                     <button class="item-remove"><i class="glyphicon glyphicon-remove"></i></button>
-                    <select class="form-control">
+                    <select ng-model="lugar.idCategoria" ng-change="updateSublistaServicios()" class="form-control">
                       <option ng-repeat="c in listadoServicios" value="{{ c.id }}">{{ c.nombre }}</option>
                     </select>
-                    <select ng-model="lugar.idServicio" ng-disabled="!item.idCategoria" class="form-control">
+                    <select ng-model="lugar.idServicio" class="form-control">
                       <option ng-repeat="s in sublistaServicios" value="{{ s.id }}">{{ s.nombre }}</option>
                     </select>
                   </h3>
@@ -136,60 +185,9 @@
           </div>
         </div>
       </div>
-      <div id="servicioModal" tabindex="-1" role="dialog" aria-labelledby="MyModalLabel" class="modal fade">
-        <div role="document" class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Nuevo Servicio</h4>
-            </div>
-            <div class="modal-body form-horizontal">
-              <div class="form-group">
-                <label class="col-sm-3 control-label">Nombre:</label>
-                <div class="col-sm-6">
-                  <input type="text" ng-model="servicioModal.nombre" class="form-control">
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" data-dismiss="modal" class="btn btn-default">Cerrar</button>
-              <button type="button" data-dismiss="modal" ng-click="servicio.nuevo()" class="btn btn-primary">Guardar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="itemModal" tabindex="-1" role="dialog" aria-labelledby="MyModalLabel" class="modal fade">
-        <div role="document" class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Nuevo Item para el Servicio</h4>
-            </div>
-            <div class="modal-body form-horizontal">
-              <div class="form-group">
-                <label class="col-sm-3 control-label">Nombre</label>
-                <div class="col-sm-6">
-                  <input type="text" ng-model="itemModal.nombre" class="form-control">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-3 control-label">Descripción</label>
-                <div class="col-sm-6">
-                  <input type="text" ng-model="itemModal.descripcion" class="form-control">
-                </div>
-              </div>
-              <input type="hidden" ng-model="itemModal.servicio">
-            </div>
-            <div class="modal-footer">
-              <button type="button" data-dismiss="modal" class="btn btn-default">Cerrar</button>
-              <button type="button" data-dismiss="modal" ng-click="item.guardar()" class="btn btn-primary">Guardar</button>
-            </div>
-          </div>
-        </div>
-      </div>
       <div style="margin-top: 30px;" class="row">
         <pre>
-          <legend>Modelo</legend>{{ guiLocalizar | json }}</pre>
+          <legend>Modelo</legend>{{ guiLugares | json }}</pre>
         <pre>
           <legend>Modelo</legend>{{ listadoServicios | json }}</pre>
       </div>

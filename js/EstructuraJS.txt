@@ -3,14 +3,14 @@ Diccionario de Datos
     - direccion: puede tener solo dos valores: "izq" y "der".
 
 GUI Localización de Servicios
-
-    - der: Variable que se cargara dinamicamente en función del arco seleccionado los datos correspondientes al lado derecho y contendra los servicios asociados previamente por el usuario
+    -guiLugares:
+        + der: Variable que se cargara dinamicamente en función del arco seleccionado los datos correspondientes al lado derecho y contendrá los servicios asociados previamente por el usuario
     
-    - izq: Variable con la misma funcion que la variable der solo que representa el lado izquierdo del arco. 
+        + izq: Variable con la misma funcion que la variable der solo que representa el lado izquierdo del arco. 
     
-    - add(direccion, lugar): function que permite agregar un nuevo lugar de servicio en el lado correspondiente a direccion que puede ser "izq" o "der"
+        + add(direccion, lugar): function que permite agregar un nuevo lugar de servicio en el lado correspondiente a direccion que puede ser "izq" o "der".
     
-    - remove(lugar): remueve el lugar seleccionado y lo quita de la lista a la que pertenece "der" o "izq".
+        + remove(lugar): remueve el lugar seleccionado y lo quita de la lista a la que pertenece "der" o "izq".
 
 Objetos de Interes:
 
