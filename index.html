@@ -153,13 +153,13 @@
                 <div class="nodo-origen">154</div>
                 <div class="panel-izq"> 
                   <div ng-repeat="lugar in guiLugares.izq track by $index">
-                    <div ts-panel-servicio direccion="left" listado-servicios="listadoServicios" lugar="lugar"></div>
+                    <div ts-panel-servicio direccion="left" listado-servicios="listadoServicios" lugar="lugar" remove="guiLugares.remove('izq', $index)"></div>
                   </div>
                   <button ng-click="guiLugares.add('izq')" class="btn btn-success">Agregar</button>
                 </div>
                 <div class="panel-der">
                   <div ng-repeat="lugar in guiLugares.der track by $index">
-                    <div ts-panel-servicio direccion="right" listado-servicios="listadoServicios" lugar="lugar"></div>
+                    <div ts-panel-servicio direccion="right" listado-servicios="listadoServicios" lugar="lugar" remove="guiLugares.remove('der', $index)"></div>
                   </div>
                   <button ng-click="guiLugares.add('der')" class="btn btn-success">Agregar</button>
                 </div>
@@ -169,7 +169,7 @@
                 <div class="popover popover-item {{ direccion }}">
                   <div class="arrow"></div>
                   <h3 class="popover-title">
-                    <button class="item-remove"><i class="glyphicon glyphicon-remove"></i></button>
+                    <button ng-click="remove()" class="item-remove"><i class="glyphicon glyphicon-remove"></i></button>
                     <select ng-model="lugar.idCategoria" ng-change="updateSublistaServicios()" class="form-control">
                       <option ng-repeat="c in listadoServicios" value="{{ c.id }}">{{ c.nombre }}</option>
                     </select>

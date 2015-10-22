@@ -16,7 +16,8 @@ app.directive('tsPanelServicio', ['$filter', function ($filter) {
             listadoServicios: '=listadoServicios',
             lugar: '=lugar',
             direccion: '@direccion',
-            index: '=index'
+            index: '=index',
+            remove: '&remove'
         },
         controller: ['$scope',
             function($scope){

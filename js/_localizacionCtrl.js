@@ -30,8 +30,14 @@ app.controller('LocalizacionCtrl',[
                 }
                 console.log('Agregregando item a la ' + direccion);
             },
-            remove: function(item){
-                console.log('Removiendo item ' + item);
+            remove: function(direccion, item){
+                switch (direccion){
+                    case 'izq': $scope.guiLugares.izq.splice(item, 1);
+                        break;
+                    case 'der': $scope.guiLugares.der.splice(item, 1);
+                        break;
+                }
+                console.log('Removiendo item ' + item + ' de ' + direccion);
             }
         };
 
