@@ -170,14 +170,20 @@
                   <div class="arrow"></div>
                   <h3 class="popover-title">
                     <button ng-click="remove()" class="item-remove"><i class="glyphicon glyphicon-remove"></i></button>
-                    <select ng-model="lugar.idCategoria" ng-change="updateSublistaServicios()" class="form-control">
-                      <option ng-repeat="c in listadoServicios" value="{{ c.id }}">{{ c.nombre }}</option>
-                    </select>
-                    <select ng-model="lugar.idServicio" class="form-control">
-                      <option ng-repeat="s in sublistaServicios" value="{{ s.id }}">{{ s.nombre }}</option>
-                    </select>
+                    <div style="margin-bottom: 3px;">
+                      <select ng-model="lugar.idCategoria" ng-change="updateSublistaServicios()" class="form-control">
+                        <option ng-repeat="c in listadoServicios" value="{{ c.id }}">{{ c.nombre }}</option>
+                      </select>
+                    </div>
+                    <div style="margin-bottom: 3px;">
+                      <select ng-model="lugar.idServicio" class="form-control">
+                        <option ng-repeat="s in sublistaServicios" value="{{ s.id }}">{{ s.nombre }}</option>
+                      </select>
+                    </div>
+                    <div style="margin-bottom: 3px;">
+                      <input type="text" placeholder="Distancia" ng-model="lugar.distancia" class="form-control">
+                    </div>
                   </h3>
-                  <div class="popover-content">Contenido</div>
                 </div>
               </script>
               <div class="col-sm-7">red</div>

@@ -19,9 +19,11 @@ script( type="text/ng-template", id="panel-servicio.html")
         h3(class="popover-title")
             button(class="item-remove", ng-click="remove()")
                 i(class="glyphicon glyphicon-remove")
-            select(class="form-control", ng-model="lugar.idCategoria", ng-change="updateSublistaServicios()")
-                option(ng-repeat="c in listadoServicios", value="{{ c.id }}") {{ c.nombre }}
-            select(class="form-control", ng-model="lugar.idServicio")
-                option(ng-repeat="s in sublistaServicios" , value="{{ s.id }}") {{ s.nombre }}
-        div(class="popover-content")
-            | Contenido
+            div(style="margin-bottom: 3px;")
+                select(class="form-control", ng-model="lugar.idCategoria", ng-change="updateSublistaServicios()")
+                    option(ng-repeat="c in listadoServicios", value="{{ c.id }}") {{ c.nombre }}
+            div(style="margin-bottom: 3px;")
+                select(class="form-control", ng-model="lugar.idServicio")
+                    option(ng-repeat="s in sublistaServicios" , value="{{ s.id }}") {{ s.nombre }}
+            div(style="margin-bottom: 3px;")
+                input(type="text", placeholder="Distancia", class="form-control", ng-model="lugar.distancia")
