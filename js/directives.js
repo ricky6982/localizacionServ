@@ -7,6 +7,7 @@
 //      - listado-servicios
 //      - lugar
 //      - direccion
+//      - remove: funcion para remover el elemento.
 app.directive('tsPanelServicio', ['$filter', function ($filter) {
     return {
         restrict: 'AE',

@@ -14,6 +14,7 @@ app.controller('AppCtrl', [
 
         $scope.guiLugares = {};
 
+        // Ejemplo con Datos Cargados
         $scope.listadoServicios = [
             {
                 id: 1,
