@@ -153,9 +153,9 @@
           <div id="localizacion" ng-controller="LocalizacionCtrl" class="tab-pane">
             <div class="row">
               <div class="col-sm-5 localizacion">
-                <div class="nodo-origen">154</div>
+                <div class="nodo-origen">{{ arcoEdit.from }}</div>
                 <div class="panel-izq"> 
-                  <div ng-repeat="lugar in guiLugares.izq track by $index">
+                  <div ng-repeat="lugar in arcoEdit.lugares.izq track by $index">
                     <div ts-panel-servicio direccion="left" listado-servicios="listadoServicios" lugar="lugar" remove="guiLugares.remove('izq', $index)"></div>
                   </div>
                   <button ng-click="guiLugares.add('izq')" class="btn btn-success">Agregar</button>
@@ -166,7 +166,7 @@
                   </div>
                   <button ng-click="guiLugares.add('der')" class="btn btn-success">Agregar</button>
                 </div>
-                <div class="nodo-destino">689</div>
+                <div class="nodo-destino">{{ arcoEdit.to }}</div>
               </div>
               <script type="text/ng-template" id="panel-servicio.html">
                 <div class="popover popover-item {{ direccion }}">

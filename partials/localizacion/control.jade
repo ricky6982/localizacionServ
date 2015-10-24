@@ -1,7 +1,7 @@
 div(class="col-sm-5 localizacion")
-    div(class="nodo-origen") 154
+    div(class="nodo-origen") {{ arcoEdit.from }}
     div(class="panel-izq") 
-        div(ng-repeat="lugar in guiLugares.izq track by $index")
+        div(ng-repeat="lugar in arcoEdit.lugares.izq track by $index")
             div(ts-panel-servicio, direccion="left", listado-servicios="listadoServicios", lugar="lugar", remove="guiLugares.remove('izq', $index)")
         button(class="btn btn-success", ng-click="guiLugares.add('izq')") Agregar
     
@@ -9,7 +9,7 @@ div(class="col-sm-5 localizacion")
         div(ng-repeat="lugar in guiLugares.der track by $index")
             div(ts-panel-servicio direccion="right" listado-servicios="listadoServicios", lugar="lugar", remove="guiLugares.remove('der', $index)")
         button(class="btn btn-success", ng-click="guiLugares.add('der')") Agregar
-    div(class="nodo-destino") 689
+    div(class="nodo-destino") {{ arcoEdit.to }}
 
 //- Template Panel de Servicios que utiliza la Directiva ts-panel-servicio
 script( type="text/ng-template", id="panel-servicio.html")

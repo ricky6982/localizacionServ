@@ -1,6 +1,6 @@
 app.controller('NetworkCtrl',[
-    '$scope',
-    function($scope){
+    '$scope', '$timeout',
+    function($scope, $timeout){
         // =============================
         // Definición de Grafo con VisJs
         // =============================
@@ -24,6 +24,18 @@ app.controller('NetworkCtrl',[
             options: $scope.options,
             container: $scope.container
         };
+
+        // Detección de Selección de Arco
+        network.on('selectEdge', function(){
+            $timeout(function(){
+                var arco = $scope.$parent.arcoEdit = $scope.edges.get(network.getSelectedEdges()[0]);
+                if (typeof arco.lugares === "undefined") {
+                    arco.lugares = {izq: [], der: []};
+                }
+            },0);
+            console.log($scope.$parent.arcoEdit);
+            // $scope.arco.getSelected();
+        });
 
     }
 ]);

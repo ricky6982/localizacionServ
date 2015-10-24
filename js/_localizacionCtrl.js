@@ -2,6 +2,9 @@
 app.controller('LocalizacionCtrl',[
     '$scope',
     function($scope){
+
+        $scope.arcoEdit = {};
+
         // ==============================================
         // Logica para la interfaz visual para posicionar
         // un servicio sobre un arco
@@ -23,7 +26,7 @@ app.controller('LocalizacionCtrl',[
             der: [],
             add: function(direccion){
                 switch (direccion){
-                    case 'izq': $scope.guiLugares.izq.push(angular.copy($scope.lugarAux));
+                    case 'izq': $scope.arcoEdit.lugares.izq.push(angular.copy($scope.lugarAux));
                         break;
                     case 'der': $scope.guiLugares.der.push(angular.copy($scope.lugarAux));
                         break;
