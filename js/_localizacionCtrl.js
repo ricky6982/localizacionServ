@@ -1,7 +1,7 @@
 // CONTROLADOR PARA LA ASIGNACIÓN DE LOS SERVICIOS EN UN ARCO
 app.controller('LocalizacionCtrl',[
-    '$scope',
-    function($scope){
+    '$scope', '$timeout',
+    function($scope, $timeout){
 
         $scope.arcoEdit = {};
 
@@ -53,11 +53,15 @@ app.controller('LocalizacionCtrl',[
         };
 
         $scope.guardar = function(){
-            console.log('guardando datos');
+            $scope.loader = true;
+            $timeout(function(){
+                $scope.loader = false;
+            },1000);
             $scope.arcoEdit.lugares.izq = angular.copy($scope.$parent.guiLugares.izq);
             $scope.arcoEdit.lugares.der = angular.copy($scope.$parent.guiLugares.der);
             dbg.edges.update($scope.arcoEdit);
-            console.log($scope.arcoEdit);
+
+            
         };
 
     }

@@ -14,7 +14,8 @@ div(class="col-sm-5 localizacion", ng-show="showForm()")
         button(class="btn btn-success", ng-click="guiLugares.add('der')") Agregar
     div(class="nodo-destino") {{ arcoEdit.to }}
     div(class="text-center", style="margin-top: 20px;")
-        button(class="btn btn-primary", ng-click="guardar()") Guardar
+        button(class="btn btn-primary", ng-click="guardar()", ng-hide="loader") Guardar
+        img(src="img/loader.gif", ng-show="loader")
 
 
 //- Template Panel de Servicios que utiliza la Directiva ts-panel-servicio
