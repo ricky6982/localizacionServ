@@ -44,6 +44,14 @@ app.controller('LocalizacionCtrl',[
             }
         };
 
+        $scope.showForm = function(){
+            if (angular.isNumber($scope.arcoEdit.from )) {
+                return true;
+            }else{
+                return false;
+            }
+        };
+
         $scope.guardar = function(){
             console.log('guardando datos');
             $scope.arcoEdit.lugares.izq = angular.copy($scope.$parent.guiLugares.izq);
