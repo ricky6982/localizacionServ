@@ -29,10 +29,12 @@
   <legend class="text-center"> Utilizando AngularJs, underscore y jquery</legend>
   <div class="container">
     <div class="well well-sm"><strong>Objetivo:</strong>
-      <p>Desarrollo de interfaces del prototipo</p>
+      <p>Desarrollar la Interfaz de Usuario que le permita agregar los servicios disponibles en la terminal y asociarlos a un lugar dentro de un trayecto.</p>
       <p>Se crearon las siguientes funciones</p>
       <ul>
-        <li>...</li>
+        <li>El ABM de las categorias de servicios y los servicios dentro de cada una.</li>
+        <li>Se importo el grafo que representa la nueva terminal para la asignación de los diferentes servicios.</li>
+        <li>Se creo la interfaz para que el usuario pueda establecer los servicios que estan ubicados en cada arco.</li>
       </ul>
     </div>
     <div style="margin: 10px;" class="row">
@@ -185,7 +187,7 @@
                       </select>
                     </div>
                     <div style="margin-bottom: 3px;">
-                      <select ng-model="lugar.idServicio" class="form-control">
+                      <select ng-model="lugar.idServicio" ng-change="updatePropiedades()" class="form-control">
                         <option ng-repeat="s in sublistaServicios" value="{{ s.id }}">{{ s.nombre }}</option>
                       </select>
                     </div>

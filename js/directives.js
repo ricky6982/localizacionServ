@@ -29,6 +29,11 @@ app.directive('tsPanelServicio', ['$filter', function ($filter) {
                     }
                 };
 
+                $scope.updatePropiedades = function(){
+                    $scope.lugar.categoria = $filter('filter')($scope.listadoServicios, {id: $scope.lugar.idCategoria })[0].nombre;
+                    $scope.lugar.servicio = $filter('filter')($scope.sublistaServicios, {id: $scope.lugar.idServicio })[0].nombre;
+                };
+
                 if ($scope.lugar) {
                     $scope.updateSublistaServicios();
                 }
