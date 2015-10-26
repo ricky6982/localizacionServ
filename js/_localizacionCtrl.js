@@ -22,11 +22,11 @@ app.controller('LocalizacionCtrl',[
         };
 
         $scope.$parent.guiLugares = {
-            izq: [{idCategoria: "1", idServicio: "11", categoria: "", servicio:""}],
+            izq: [],
             der: [],
             add: function(direccion){
                 switch (direccion){
-                    case 'izq': $scope.arcoEdit.lugares.izq.push(angular.copy($scope.lugarAux));
+                    case 'izq': $scope.guiLugares.izq.push(angular.copy($scope.lugarAux));
                         break;
                     case 'der': $scope.guiLugares.der.push(angular.copy($scope.lugarAux));
                         break;
@@ -42,6 +42,14 @@ app.controller('LocalizacionCtrl',[
                 }
                 console.log('Removiendo item ' + item + ' de ' + direccion);
             }
+        };
+
+        $scope.guardar = function(){
+            console.log('guardando datos');
+            $scope.arcoEdit.lugares.izq = angular.copy($scope.$parent.guiLugares.izq);
+            $scope.arcoEdit.lugares.der = angular.copy($scope.$parent.guiLugares.der);
+            dbg.edges.update($scope.arcoEdit);
+            console.log($scope.arcoEdit);
         };
 
     }

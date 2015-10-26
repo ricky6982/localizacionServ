@@ -29,12 +29,17 @@ app.controller('NetworkCtrl',[
         network.on('selectEdge', function(){
             $timeout(function(){
                 var arco = $scope.$parent.arcoEdit = $scope.edges.get(network.getSelectedEdges()[0]);
-                if (typeof arco.lugares === "undefined") {
+                if (typeof arco.lugares === 'undefined') {
                     arco.lugares = {izq: [], der: []};
+                    $scope.$parent.guiLugares.izq = [];
+                    $scope.$parent.guiLugares.der = [];
+                    console.log('Se creo la estructura de datos en el arco seleccionado.');
+                }else{
+                    $scope.$parent.guiLugares.izq = angular.copy(arco.lugares.izq);
+                    $scope.$parent.guiLugares.der = angular.copy(arco.lugares.der);
+                    console.log('Tiene lugares establecidos');
                 }
             },0);
-            console.log($scope.$parent.arcoEdit);
-            // $scope.arco.getSelected();
         });
 
     }
